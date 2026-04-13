@@ -57,6 +57,19 @@ def crear_textfield(label, color, color2):
         bgcolor=color2
     )
 
+def comprar(valor, item, control_oro, page):
+    global oro # Avisamos que vamos a modificar el oro de afuera
+    
+    if oro >= valor:
+        oro = oro - valor
+        inventario.append(item)
+        
+        # Actualizamos el texto en pantalla
+        control_oro.value = f"{str(oro)}" 
+        page.update()
+    else:
+        print("¡No tienes suficiente oro!")
+
 espacio_vacio = ft.Container(height=50)
 
 # Pestaña del bosque:
@@ -119,36 +132,42 @@ async def quedarse_en_el_lugar(page):
 async def explorar(page):
     page.clean()
 
+    def volver_al_menú(e):
+        page.clean()
+        mostrar_juego(page)
+
     texto1_explorar = crear_subtitulo("Has caminado un largo sendero y encontraste una tienda", ft.Colors.WHITE)
     texto2_explorar = crear_subtitulo("Entras a la tienda y un hombre encapuchado se acerca a ti y por", ft.Colors.WHITE)
     texto3_explorar = crear_subtitulo("arte de magia hace aparecer 4 objetos encima del mostrador", ft.Colors.WHITE)
     texto4_explorar = crear_subtitulo('"Escoge sabiamente", te susurra entre risas', ft.Colors.WHITE)
 
     espada_berserker1 = crear_texto(f"{tienda[0]["nombre"]}", color=ft.Colors.BLUE_900)
-    espada_berserker2 = ft.Button(f"COMPRAR (${tienda[0]["precio"]})", bgcolor=ft.Colors.BLUE_900, width=250, height=60)
+    espada_berserker2 = ft.Button(f"COMPRAR (${tienda[0]["precio"]})", bgcolor=ft.Colors.BLUE_900, width=250, height=60, on_click=lambda e: comprar(tienda[0]["precio"], tienda[0]["nombre"], oro_disponible, page))
     espada_serberker3 = ft.Column(controls=[espada_berserker1, espada_berserker2], horizontal_alignment=ft.CrossAxisAlignment.CENTER)
 
     pocima1 = crear_texto(f"{tienda[1]["nombre"]}", color=ft.Colors.BLUE_900)
-    pocima2 = ft.Button(f"COMPRAR (${tienda[1]["precio"]})", bgcolor=ft.Colors.BLUE_900, width=250, height=60)
+    pocima2 = ft.Button(f"COMPRAR (${tienda[1]["precio"]})", bgcolor=ft.Colors.BLUE_900, width=250, height=60, on_click=lambda e: comprar(tienda[1]["precio"], tienda[1]["nombre"], oro_disponible, page))
     pocima3 = ft.Column(controls=[pocima1, pocima2], horizontal_alignment=ft.CrossAxisAlignment.CENTER)
 
     primera_fila = ft.Row(controls=[espada_serberker3, pocima3], alignment=ft.MainAxisAlignment.SPACE_EVENLY)
 
     pan1 = crear_texto(f"{tienda[2]["nombre"]}", color=ft.Colors.BLUE_900)
-    pan2 = ft.Button(f"COMPRAR (${tienda[2]["precio"]})", bgcolor=ft.Colors.BLUE_900, width=250, height=60)
+    pan2 = ft.Button(f"COMPRAR (${tienda[2]["precio"]})", bgcolor=ft.Colors.BLUE_900, width=250, height=60, on_click=lambda e: comprar(tienda[2]["precio"], tienda[2]["nombre"], oro_disponible, page))
     pan3 = ft.Column(controls=[pan1, pan2], horizontal_alignment=ft.CrossAxisAlignment.CENTER)
 
     mapa_misterioso1 = crear_texto(f"{tienda[3]["nombre"]}", color=ft.Colors.BLUE_900)
-    mapa_misterioso2 = ft.Button(f"COMPRAR (${tienda[3]["precio"]})", bgcolor=ft.Colors.BLUE_900, width=250, height=60)
+    mapa_misterioso2 = ft.Button(f"COMPRAR (${tienda[3]["precio"]})", bgcolor=ft.Colors.BLUE_900, width=250, height=60, on_click=lambda e: comprar(tienda[3]["precio"], tienda[3]["nombre"], oro_disponible, page))
     mapa_misterioso3 = ft.Column(controls=[mapa_misterioso1, mapa_misterioso2], horizontal_alignment=ft.CrossAxisAlignment.CENTER)
 
     segunda_fila = ft.Row(controls=[pan3, mapa_misterioso3], alignment=ft.MainAxisAlignment.SPACE_EVENLY)
+
+    cerrar_tienda = ft.Button(f"Volver al menú principal", bgcolor=ft.Colors.BLUE_900, width=250, height=60, on_click=volver_al_menú)
 
     oro_disponible = crear_texto(f"{str(oro)}", ft.Colors.YELLOW)
     oro_disponible2 = crear_texto(f"Oro: ", ft.Colors.WHITE)
     total_oro = ft.Row(controls=[oro_disponible2, oro_disponible])
 
-    page.add(texto1_explorar, texto2_explorar, texto3_explorar, texto4_explorar, primera_fila, segunda_fila, total_oro)
+    page.add(texto1_explorar, texto2_explorar, texto3_explorar, texto4_explorar, primera_fila, segunda_fila, cerrar_tienda, total_oro)
 
 
 def main(page):
