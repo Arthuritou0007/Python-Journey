@@ -5,12 +5,12 @@ import asyncio
 nombre_de_usuario = "Arthuritou007"
 contraseña = "chipilipi123"
 inventario = ["🗡️ Daga oxidada", "❤️ Pósima"]
-oro = 200
+oro = 2000
 tienda = [
-    {"nombre": "Espada Berserker", "precio": 1000},
-    {"nombre": "Pócima", "precio": 50},
-    {"nombre": "Pan", "precio": 100},
-    {"nombre": "Mapa Misterioso", "precio": 10}
+    {"nombre": "⚔️ Espada Berserker", "precio": 1000},
+    {"nombre": "❤️ Pósima", "precio": 50},
+    {"nombre": "🍞 Pan", "precio": 100},
+    {"nombre": "🗺️ Mapa Misterioso", "precio": 10}
 ]
 
 # Inventario: 
@@ -63,12 +63,17 @@ def comprar(valor, item, control_oro, page):
     if oro >= valor:
         oro = oro - valor
         inventario.append(item)
+
+        item_comprado = ft.Text(f"{item}", size=20, weight=ft.FontWeight.BOLD)
+        mochila.controls.append(item_comprado)
         
         # Actualizamos el texto en pantalla
         control_oro.value = f"{str(oro)}" 
         page.update()
     else:
         print("¡No tienes suficiente oro!")
+
+
 
 espacio_vacio = ft.Container(height=50)
 
