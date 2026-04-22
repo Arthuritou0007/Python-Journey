@@ -19,4 +19,4 @@ class Latas:
 
 Maquina = Latas()
 
-print(Maquina.comprar(2000))
+print(Maquina.comprar(2000))    

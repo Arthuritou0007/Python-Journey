@@ -1,7 +1,7 @@
 class Turno:
     turno = 0
 
-    def __init__(self, cliente_ingresado):
+    def __init__(self, cliente_ingresado): # Por no ponerle la "t" al init se me rompió todo el código :v
         self.cliente = cliente_ingresado
         Turno.turno = Turno.turno + 1
         self.ticket = Turno.turno
