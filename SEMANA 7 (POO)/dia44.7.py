@@ -12,6 +12,7 @@ class Cafetera:
             elección = int(input("Escoge qué quieres recargar: "))
         except ValueError:
             print("Error: Escoge una opción correcta")
+            return
         if elección == 1:
             try:
                 cantidad = int(input("Ingresa la cantidad de gramos de café que quieres recargar a la cafetera: "))
@@ -20,7 +21,7 @@ class Cafetera:
             self.cafe = self.cafe + cantidad
             print("¡Cafetera recargada con éxito!")
             print(self.ver_contenido())
-        if elección == 2:
+        elif elección == 2:
             try:
                 cantidad = int(input("Ingresa la cantidad de ml de agua que quieres recargar a la cafetera: "))
             except ValueError:
@@ -35,10 +36,10 @@ class Cafetera:
     def hacer_espresso(self):
         if self.agua < 50:
             agua_faltante = 50 - self.agua
-            return f"No hay agua suficiente para realizar el espresso\nAgua faltante: {agua_faltante}"
-        if self.cafe < 20:
-            cafe_faltante = 20 - self.agua
-            return f"No hay agua suficiente para realizar el espresso\nAgua faltante: {cafe_faltante}"
+            return f"No hay agua suficiente para realizar el espresso\nAgua faltante: {agua_faltante}ml"
+        elif self.cafe < 20:
+            cafe_faltante = 20 - self.cafe
+            return f"No hay café suficiente para realizar el espresso\nAgua faltante: {cafe_faltante}g"
         else:
             self.agua = self.agua - 50
             self.cafe = self.cafe - 20
@@ -47,10 +48,10 @@ class Cafetera:
     def hacer_americano(self):
         if self.agua < 200:
             agua_faltante = 200 - self.agua
-            return f"No hay agua suficiente para realizar el americano\nAgua faltante: {agua_faltante}"
-        if self.cafe < 15:
+            return f"No hay agua suficiente para realizar el americano\nAgua faltante: {agua_faltante}ml"
+        elif self.cafe < 15:
             cafe_faltante = 15 - self.cafe
-            return f"No hay café suficiente para realizar el americano\nCafe faltante: {cafe_faltante}"
+            return f"No hay café suficiente para realizar el americano\nCafe faltante: {cafe_faltante}g"
         else:
             self.agua = self.agua - 200
             self.cafe = self.cafe - 15
@@ -68,9 +69,11 @@ while True:
         continue
     if eleccion == 1:
         print(cafetera1.hacer_espresso())
-    if eleccion == 2:
+    elif eleccion == 2:
         print(cafetera1.hacer_americano())
-    if eleccion == 3:
+    elif eleccion == 3:
         cafetera1.recargar_cafe()
     else:
         print("Error: Ingrese un número válido")
+
+
