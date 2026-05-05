@@ -11,7 +11,7 @@ class Personaje:
         return self._vida
     
     @vida.setter
-    def vida(self, nuevo_valor):
+    def vida(self, nuevo_valor): # Nuevo valor = resultado de la operación realizada en la línea 32
         if nuevo_valor < 0:
             self._vida = 0
         else:
