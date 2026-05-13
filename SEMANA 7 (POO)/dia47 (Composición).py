@@ -23,7 +23,7 @@ class Guerrero:
         self.mano_izquierda = escudo_nuevo
 
     def defender_ataque(self, daño_entrante):
-        if self.mano_izquierda != None:
+        if self.mano_izquierda is not None:
             self.mano_izquierda.recibir_daño(daño_entrante)
         else:
             print(f"¡Recibiste de lleno un golpe de {daño_entrante} de daño por no tener escudo!")
@@ -32,7 +32,7 @@ class Guerrero:
 arthur = Guerrero("Arthur")
 escudo_roble = Escudo("Escudo de Roble", 15, 20)
 
-
+arthur.equipar_escudo(escudo_roble)
 
 arthur.defender_ataque(30)
 arthur.defender_ataque(6)
