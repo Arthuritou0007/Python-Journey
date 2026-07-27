@@ -1,3 +1,11 @@
+def determinar_categoria(peso):
+    if peso <= 60:
+        return "Medio"
+    if peso <= 67:
+        return "Welter"
+    if peso > 67:
+        return "Mediano"
+
 class Licencia:
 
     contador_licencias = 0
@@ -26,12 +34,14 @@ class Juez(Licencia):
 class Pugil(Licencia):
     def __init__(self, nombre, DNI, peso):
         super().__init__(nombre, DNI)
-        self.peso = peso
+        self.peso = determinar_categoria(peso)
     
     def __str__(self):
-        return f"**BOXEADOR** Boxeador: {self.nombre} | DNI: {self.DNI} | Peso: {self.peso}"
+        return f"**BOXEADOR** Boxeador: {self.nombre} | DNI: {self.DNI} | Categoría: {self.peso}"
 
-licenciados = [Juez("Pablo", 367289, "Provincial"), Pugil("Arthur", 6472388, 69), Juez("Pedro", 367289, "Nacional"), Pugil("Flor", 6472388, 69)]
+licenciados = [Juez("Pablo", 367289, "Provincial"), Pugil("Arthur", 6472388, 65), Juez("Pedro", 367289, "Nacional"), Pugil("Flor", 6472388, 49), Pugil("Wllter", 6472388, 760)]
 
 print(licenciados)
+print(f"\n{licenciados[1]}")
 print(f"\n{licenciados[3]}")
+print(f"\n{licenciados[4]}")
