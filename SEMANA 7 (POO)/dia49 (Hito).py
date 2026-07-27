@@ -45,7 +45,7 @@ class Local:
                 contador_dietetica += 1
         print(f"Productos de dietética registrados: {contador_dietetica}\nProductos de verdulería registrados: {contador_verduras}")
         print("¿Cuál lista deseas ver?\n1. Dietetica\n2. Verdulería")
-        eleccion = int(input("Ingrese aquí su respuesta:"))
+        eleccion = int(input("Ingrese aquí su respuesta: "))
 
 frutimas = Local()
 
