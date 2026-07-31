@@ -47,10 +47,13 @@ class Federación:
     def emitir_licencia(self, afiliado):
         self.padron.append(afiliado)
 
+    def buscar_por_dni(self, dni):
+        for i in self.padron:
+            if isinstance(i, dni):
+                print(i)
+            else:
+                print("No hay ningún liceanciado registrado con ese DNI")
 
-licenciados = [Juez("Pablo", 367289, "Provincial"), Pugil("Arthur", 6472388, 65), Juez("Pedro", 367289, "Nacional"), Pugil("Flor", 6472388, 49), Pugil("Wllter", 6472388, 760)]
+arthur = Licencia("juan", 123123)
 
-print(licenciados)
-print(f"\n{licenciados[1]}")
-print(f"\n{licenciados[3]}")
-print(f"\n{licenciados[4]}")
+print(arthur.DNI)
