@@ -49,11 +49,27 @@ class Federación:
 
     def buscar_por_dni(self, dni):
         for i in self.padron:
-            if isinstance(i, dni):
+            if i.DNI == dni:
                 print(i)
-            else:
-                print("No hay ningún liceanciado registrado con ese DNI")
+                break
+        else:
+            print("No se encontró ningún licenciado registrado con ese DNI")
 
-arthur = Licencia("juan", 123123)
+    def actualizar_peso(self, dni, nuevo_peso):
+        for i in self.padron:
+            if isinstance(i, Pugil):
+                if i.DNI == dni:
+                    i.peso = nuevo_peso
+                    i.categoria = determinar_categoria(nuevo_peso)
+                    break
+        else:
+            print("No se encontró a ningún boxeador con ese DNI")
 
-print(arthur.DNI)
+    def cancelar_licencia(self, dni):
+        for i in self.padron:
+            if i.DNI == dni:
+                print(f"La licencia de '{i.nombre}' ha sido eliminada correctamente")
+                self.padron.remove(i)
+                break
+        else:
+            print("No se encontró ningún licenciado registrado con ese DNI")
