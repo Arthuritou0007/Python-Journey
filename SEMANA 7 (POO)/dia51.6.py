@@ -15,6 +15,11 @@ class Pugil:
         self.empates = 0
         self.historial_peleas = [] # Acá guardaremos diccionarios con cada pelea
 
+        datos_para_guardar = self.to_dict()
+
+        with open(f"boxeador_{self.dni}.json", "w", encoding="utf-8") as archivo:
+            json.dump(datos_para_guardar, archivo, indent=4, ensure_ascii=False)
+
     # EL TRADUCTOR
     def to_dict(self):
         return {
@@ -33,17 +38,10 @@ class Pugil:
             "historial_peleas": self.historial_peleas
         }
 
-datos_recuperados = 0
+    def actualizar(self, dni):
+        datos_recuperados = 0
+                    
+        with open(f"boxeador_{dni}.json", "r", encoding="utf-8") as archivo:
+            datos_recuperados = json.load(archivo)
 
-with open("boxeador_chamorro.json", "r", encoding="utf-8") as archivo:
-    datos_recuperados = json.load(archivo)
-
-boxeador_clon = Pugil(datos_recuperados["dni"], datos_recuperados["nombre"], datos_recuperados["gimnasio"], datos_recuperados["peso"], datos_recuperados["postura"])
-boxeador_clon.historial_peleas = datos_recuperados["historial_peleas"]
-boxeador_clon.victorias = datos_recuperados["estadisticas"]["victorias"]
-boxeador_clon.estado = datos_recuperados["estado"]
-datos_para_guardar = boxeador_clon.to_dict()
-
-with open("boxeador_clon.json", "w", encoding="utf-8") as archivo:
-    
-    json.dump(datos_para_guardar, archivo, indent=4, ensure_ascii=False)
+        
