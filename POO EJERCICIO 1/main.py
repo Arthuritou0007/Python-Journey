@@ -12,8 +12,8 @@ while True:
         opcion = int(input("Ingresar opción:"))
         if opcion == 1:
             print("Abriendo base de datos...")
+            print("Ha entrado a la base de datos.")
             while True:
-                print("Ha entrado a la base de datos.")
                 print("[1] Registrar una nueva mascota")
                 print("[2] Ver mascotas registradas")
                 try:
@@ -45,13 +45,19 @@ while True:
                     if opcion == 2:
                         print("Mostrando base de datos...")
                         contador = 1
-                        for nombre in obtener_lista_pacientes():
+                        lista_archivos = obtener_lista_pacientes()
+                        for nombre in lista_archivos:
                             print(f"[{contador}] {nombre}")
                             contador += 1
                         print("¿A qué paciente desea acceder?")
                         try:
-                            opcion = input("Ingresar opción:")
-                            print(cargar_datos(opcion))
+                            opcion = int(input("Ingresar opción (Numérica):"))
+                            opcion_final = opcion - 1
+                            datos = cargar_datos(lista_archivos[opcion_final])
+                            print(f"Nombre: {datos['nombre']}")
+                            print(f"Animal: {datos['animal']}")
+                            print(f"Dueño: {datos['dueño']}")
+                            print(f"Motivo de la consulta: {datos['motivo']}")
                         except ValueError:
                             print("¡Ingrese un dato válido!")
                 except ValueError:

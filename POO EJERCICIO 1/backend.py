@@ -6,7 +6,7 @@ def guardar_datos(datos):
         json.dump(datos, archivo, indent=4, ensure_ascii=False)
 
 def cargar_datos(nombre_mascota):
-    with open(f"POO EJERCICIO 1/DATABASE/{nombre_mascota}.json", "r", encoding="utf-8") as archivo:
+    with open(f"POO EJERCICIO 1/DATABASE/{nombre_mascota}", "r", encoding="utf-8") as archivo:
         datos = json.load(archivo)
         return datos
 
