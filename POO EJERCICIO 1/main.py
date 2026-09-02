@@ -1,5 +1,7 @@
 from models import Mascota
 from backend import guardar_datos
+from backend import obtener_lista_pacientes
+from backend import cargar_datos
 
 print("¡Hola! Bienvenido al menú interactivo")
 while True:
@@ -42,7 +44,16 @@ while True:
                             print("¡Ingrese un dato válido!")
                     if opcion == 2:
                         print("Mostrando base de datos...")
-                        break
+                        contador = 1
+                        for nombre in obtener_lista_pacientes():
+                            print(f"[{contador}] {nombre}")
+                            contador += 1
+                        print("¿A qué paciente desea acceder?")
+                        try:
+                            opcion = input("Ingresar opción:")
+                            print(cargar_datos(opcion))
+                        except ValueError:
+                            print("¡Ingrese un dato válido!")
                 except ValueError:
                     print("¡Ingrese un dato válido!")
         if opcion == 2:
