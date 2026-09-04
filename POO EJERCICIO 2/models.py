@@ -5,9 +5,7 @@ class Pedido:
         self.productos = []
 
     def agregar_producto(self, pedido):
-        for i in menu:
-            if i["Producto"] == pedido:
-                self.productos.append(i)
+        self.productos.append(pedido)
 
     def calcular_total(self):
         contador = 0
@@ -28,3 +26,4 @@ menu = [
     {"Producto": "Porción de papas", "Valor": 2500},
     {"Producto": "Gaseosa", "Valor": 3000}
 ]
+
