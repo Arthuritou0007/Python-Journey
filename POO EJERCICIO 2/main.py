@@ -48,7 +48,11 @@ while True:
                 print("Cancelando pedido. Volviendo al menú principal...")
                 continue
             pedido = Pedido(comensal, mesa)
-            producto = elegir_menu()
+            try: 
+                producto = elegir_menu()
+            except IndexError:
+                print("¡Ingrese un dato válido!")
+                continue
             pedido.agregar_producto(producto)
             while True:
                 print("¿Desea agregar algo más?\n[1] Sí\n[2] No")
