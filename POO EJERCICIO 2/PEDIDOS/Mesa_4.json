@@ -1,10 +1,18 @@
 {
-    "comensal": "pedro",
+    "comensal": "pablo",
     "mesa": "4",
     "productos": [
         {
             "Producto": "Porción de papas",
             "Valor": 2500
+        },
+        {
+            "Producto": "Gaseosa",
+            "Valor": 3000
+        },
+        {
+            "Producto": "Hamburguesa con papas",
+            "Valor": 5000
         }
     ]
 }

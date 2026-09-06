@@ -15,18 +15,19 @@ def elegir_menu():
     return menu[eleccion]
 
 def chequeo_menu(lista, mesa):
-    while True:
-        for i in lista:
-            if f"Mesa_{mesa}" == i:
-                print("¡Cuidado! Ya habías ordenado en ésta mesa.\nSi continúas, sobreescribirás la orden.\n¿Deseas continuar?\n[1] Sí\n[2] No")
-                try:
-                    eleccion = int(input("Ingresar elección:"))
-                    if eleccion == 1:
-                        return True
-                    if eleccion == 2:
-                        return False
-                except ValueError:
-                    print("¡Ingrese un dato válido!")
+    archivo_buscado = f"Mesa_{mesa}.json"
+    if archivo_buscado in lista:
+        while True:
+            print("¡Cuidado! Ya habías ordenado en ésta mesa.\nSi continúas, sobreescribirás la orden anterior.\n¿Deseas continuar?\n[1] Sí\n[2] No")
+            try:
+                eleccion = int(input("Ingresar elección:"))
+                if eleccion == 1:
+                    return True
+                if eleccion == 2:
+                    return False
+            except ValueError:
+                print("¡Ingrese un dato válido!")
+    return True
             
 
 print("Abriendo menú interactivo de la hamburguesería...")
@@ -42,12 +43,33 @@ while True:
             comensal = input("Comensal:")
             mesa = input("Mesa:")
             lista_pedidos = os.listdir("POO EJERCICIO 2/PEDIDOS")
-            
-            chequeo_menu(lista_pedidos, mesa)
+            puede_continuar = chequeo_menu(lista_pedidos, mesa)
+            if puede_continuar == False:
+                print("Cancelando pedido. Volviendo al menú principal...")
+                continue
             pedido = Pedido(comensal, mesa)
             producto = elegir_menu()
             pedido.agregar_producto(producto)
+            while True:
+                print("¿Desea agregar algo más?\n[1] Sí\n[2] No")
+                try:
+                    eleccion = int(input("Ingresar elección:"))
+                    if eleccion == 1:
+                        producto = elegir_menu()
+                        pedido.agregar_producto(producto)
+                    if eleccion == 2:
+                        break
+                except ValueError:
+                    print("¡Ingrese un dato válido!")
             database = pedido.to_dict()
             guardar_datos(database)
+        if opcion == 2:
+            lista_pedidos = os.listdir("POO EJERCICIO 2/PEDIDOS")
+            for i in lista_pedidos:
+                numero_mesa = i.replace("Mesa_", "")
+                numero_mesa = numero_mesa.replace(".json", "")
+                print(f"Mesa N°{numero_mesa}")
+            mesa = int(input("Ingrese la mesa que desea modificar o eliminar: "))
+            cargar_datos
     except ValueError:
         print("¡Igrese un número válido!")
