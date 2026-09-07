@@ -20,7 +20,7 @@ def chequeo_menu(lista, mesa):
         while True:
             print("¡Cuidado! Ya habías ordenado en ésta mesa.\nSi continúas, sobreescribirás la orden anterior.\n¿Deseas continuar?\n[1] Sí\n[2] No")
             try:
-                eleccion = int(input("Ingresar elección:"))
+                eleccion = int(input("Ingresar elección: "))
                 if eleccion == 1:
                     return True
                 if eleccion == 2:
@@ -37,11 +37,11 @@ while True:
     print("[1] Agregar un pedido")
     print("[2] Ver historial de pedidos")
     try:
-        opcion = int(input("Ingresar opción:"))
+        opcion = int(input("Ingresar opción: "))
         if opcion == 1:
             print("Rellene los datos:")
-            comensal = input("Comensal:")
-            mesa = input("Mesa:")
+            comensal = input("Comensal: ")
+            mesa = int(input("Mesa: "))
             lista_pedidos = os.listdir("POO EJERCICIO 2/PEDIDOS")
             puede_continuar = chequeo_menu(lista_pedidos, mesa)
             if puede_continuar == False:
@@ -57,7 +57,7 @@ while True:
             while True:
                 print("¿Desea agregar algo más?\n[1] Sí\n[2] No")
                 try:
-                    eleccion = int(input("Ingresar elección:"))
+                    eleccion = int(input("Ingresar elección: "))
                     if eleccion == 1:
                         producto = elegir_menu()
                         pedido.agregar_producto(producto)
@@ -74,6 +74,23 @@ while True:
                 numero_mesa = numero_mesa.replace(".json", "")
                 print(f"Mesa N°{numero_mesa}")
             mesa = int(input("Ingrese la mesa que desea modificar o eliminar: "))
-            cargar_datos
+            datos_mesa = cargar_datos(mesa)
+            print(f"Comensal: {datos_mesa['comensal']}")
+            print(f"Mesa: {datos_mesa['mesa']}")
+            print("---= PRODUCTOS =---")
+            contador = 1
+            for i in datos_mesa['productos']:
+                print(f"[{contador}] {i['Producto']} ${i['Valor']}")
+                contador += 1
+            pedido = Pedido(datos_mesa['comensal'], datos_mesa['mesa'])
+            pedido.productos = datos_mesa['productos']
+            print("¿Qué desea hacer?")
+            print("[1] Cobrar")
+            print("[2] Modificar pedido")
+            print("[3] Eliminar pedido")
+            eleccion = int(input("Ingresar elección: "))
+            if eleccion == 1:
+                print(f"TOTAL A COBRAR: ${pedido.calcular_total()}")
+                
     except ValueError:
         print("¡Igrese un número válido!")

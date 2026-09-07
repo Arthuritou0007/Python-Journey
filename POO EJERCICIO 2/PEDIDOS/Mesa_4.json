@@ -1,0 +1,10 @@
+{
+    "comensal": "d",
+    "mesa": 4,
+    "productos": [
+        {
+            "Producto": "Gaseosa",
+            "Valor": 3000
+        }
+    ]
+}
